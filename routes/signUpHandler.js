@@ -11,8 +11,8 @@ router.post('/',function(req,res,next){
 		var valicode = new Buffer(captchaImg()).toString('base64')
 		res.render('signup',{message:'Wrong response to captcha',valicode:valicode})
 	}else{
-		User.find({username:req.body.username},function(err, user){
-		if(user.length){
+		User.findOne({username:req.body.username},function(err, user){
+		if(user){
 			console.log('Rendering with a message')
 			console.log(user)
 			var valicode = new Buffer(captchaImg()).toString('base64')
@@ -22,7 +22,7 @@ router.post('/',function(req,res,next){
 			const saltRounds = 10;
 			const myPlaintextPassword = req.body.password;
 			bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-  				var user = User({username: req.body.username, password: hash, type: 'student', moderated:false})
+  				var user = User({username: req.body.username, password: hash, journals : []})
 				user.save(function(err,user){
 					console.log(user)
 				}) ;
