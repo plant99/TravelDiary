@@ -5,7 +5,6 @@ var bcrypt = require('bcrypt') ;
 const saltRounds = 10;
 
 router.post('/',function(req,res,next){
-	console.log(req.cookies)
 	User.findOne({username:req.body.username} , function(err,user){
 
 		if(err) throw err ;

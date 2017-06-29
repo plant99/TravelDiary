@@ -1,8 +1,6 @@
 var jwt = require('jsonwebtoken')
 
 module.exports = function(req,res,next){
-	console.log('Chutiya')
-	console.log(req.body)
 	var token = req.body.token || req.headers['x-access-token'] || req.query.token || req.cookies.token
 	console.log(token)
 	if(token){
@@ -14,7 +12,6 @@ module.exports = function(req,res,next){
 				})
 			}else{	
 				req.decoded = decoded ;
-				console.log(decoded)
 				next() ;
 			}
 		})
