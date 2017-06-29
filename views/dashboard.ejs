@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style type="text/css"></style>
+
+</head>
+<body>
+	<div class="tabs">
+		<div class="tab create">CREATE</div>		
+		<div class="tab browse">BROWSE</div>
+	</div>
+	<div class="dummy"></div>
+	<div class="boards">
+		<div class="board create-board">
+			<div class="map" id='map1'></div>
+		</div>
+		<div class="board browse-board">
+			<div class="map" id="map2"></div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+
+	<script type="text/javascript" src="/javascripts/script.js"></script>
+    <script>
+      function initMap() {
+        var trichy = {lat: 10.75, lng: 78.19};
+        var map1 = new google.maps.Map(document.getElementById('map1'), {
+          zoom: 4,
+          center: trichy
+        });
+        var map2 = new google.maps.Map(document.getElementById('map2'), {
+          zoom: 4,
+          center: trichy
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ&callback=initMap">
+    </script>
+
+
+</body>
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    
+  </body>
+</html> -->
