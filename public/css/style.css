@@ -30,6 +30,7 @@ input, select{
 	text-decoration: none ;
 }
 .tab{
+	color: cyan ;
 	width: 10% ;
 	background-color: grey ;
 	padding: 20px ;
@@ -59,7 +60,7 @@ input, select{
 	height: 400px ;
 }
 .addForm{
-	display: none; 
+	display: block; 
 	margin-top:-50px;
 	width: 100% ;
 	text-align: center;
@@ -83,8 +84,17 @@ textarea{
 	width:25%;
 }
 .message{
+	border-radius: 10px ;
+	margin-left: 25% ;
+	width: 50% ;
 	padding: 20px ;
 	margin-top:20px ;
-	color: white ;
+	color: cyan ;
 	background-color: grey ;
+}
+.esc{
+	color: cyan ;
+	background-color: grey ;
+	padding: 10px ;
+	border-radius: 8px ;
 }
