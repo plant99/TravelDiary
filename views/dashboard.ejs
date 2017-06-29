@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -10,6 +10,15 @@
 
 </head>
 <body>
+  <%if(message){%>
+  <p class="message"><%=message%></p>
+  <script type="text/javascript">
+    var message = document.querySelector('.message') ;
+    setTimeout(function(){
+      message.remove()
+    },3000)
+  </script>
+  <%}%>
 	<div class="tabs">
 		<div class="tab create">CREATE</div>		
 		<div class="tab browse">BROWSE</div>
@@ -24,12 +33,39 @@
 		</div>
 	</div>
 
+  <div class="addForm">
+    <form action="/dashboard" autocomplete="false" method="post" enctype="multipart/form-data">
+      <p>Add title</p>
+      <input type="text" name="title" class="textbox">
+      <br>
+      <p>Write the journal here</p>
+      <textarea class="journal" name="journal"></textarea>
+      <br>
+      <p>Type of the journal</p>
+      <select name="type">
+        <option value="public">PUBLIC</option>
+        <option value="private">PRIVATE</option>
+      </select>
+      <p>Position you want to save(Automatically saved)</p>
+      <input id="position" type="text" name="position" readonly>
+      <br>
+      <input type="submit" name="submit">
+    </form>
+  </div>
+
 
 	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ&callback=initMap">
+    </script>
+
 	<script type="text/javascript" src="/javascripts/script.js"></script>
-    <script>
-      function initMap() {
+
+    <script defer>
+    var position = document.getElementById('position')
+    var marker= null ;
+    function initMap() {
         var trichy = {lat: 10.75, lng: 78.19};
         var map1 = new google.maps.Map(document.getElementById('map1'), {
           zoom: 4,
@@ -39,12 +75,25 @@
           zoom: 4,
           center: trichy
         });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ&callback=initMap">
-    </script>
+        map1.addListener('click', function(e){
+          if(marker){
+            marker.setMap(null)
+          }
+        	marker = new google.maps.Marker({
+        		position: {lat:e.latLng.lat(), lng:e.latLng.lng()},
+        		map:map1,
+            draggable:true
+        	})
+          marker.addListener('click',function(){
+            showForm();
+          })
+          position.value = marker.getPosition().lat()+'-' +marker.getPosition().lng() ;
+          })
+	
+	  }
 
+
+    </script>
 
 </body>
 </html>
