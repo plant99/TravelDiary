@@ -5,7 +5,7 @@ var $browseBoard = $('.browse-board')
 var map1 = document.getElementById('map1') ;
 var addForm = document.querySelector('.addForm') ;
 var viewJournal = document.querySelector('.viewJournal')
-
+var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 var trichy = {lat: 10.75, lng: 78.19};
 $create.click(function(){
 	$createBoard.css('display','block')
@@ -19,6 +19,17 @@ $browse.click(function(){
       zoom: 4,
       center: trichy
     });
+   map2.addListener('click',function(e){
+   	map2.panTo({lat:e.latLng.lat(),lng: e.latLng.lng()})
+   	var markerToFindNearby = new google.maps.Marker({
+   		position:e.latLng,
+   		map:map2,
+   		icon: image
+   	})
+   	$.get('/serve_json/public_journals',function(responseText){
+   		
+   	})
+   })
 
     $.get('/serve_json/public_journals', function(responseText){
     	var success = responseText.success ;
