@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Fondamento" rel="stylesheet"> 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -27,9 +28,18 @@
 		<div class="board create-board">
 			<div class="map" id='map1'></div>
 		</div>
-		<div class="board browse-board">
+
+		<div class="browse-board board" >
 			<div class="map" id="map2"></div>
+      <div class="nearbyList">
+        
+      </div>
+      <div class="viewJournal">
+        
+      </div>
+      <div class="dummy"></div>
 		</div>
+
 	</div>
 
   <div class="addForm">
@@ -60,18 +70,12 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ&callback=initMap">
     </script>
 
-	<script type="text/javascript" src="/javascripts/script.js"></script>
-
     <script defer>
     var position = document.getElementById('position')
     var marker= null ;
     function initMap() {
         var trichy = {lat: 10.75, lng: 78.19};
         var map1 = new google.maps.Map(document.getElementById('map1'), {
-          zoom: 4,
-          center: trichy
-        });
-        var map2 = new google.maps.Map(document.getElementById('map2'), {
           zoom: 4,
           center: trichy
         });
@@ -89,11 +93,13 @@
           })
           position.value = marker.getPosition().lat()+'-' +marker.getPosition().lng() ;
           })
-	
-	  }
+	   }
 
 
     </script>
+
+
+  <script type="text/javascript" src="/javascripts/script.js"></script>
 
 </body>
 </html>
