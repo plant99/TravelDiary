@@ -5,8 +5,13 @@ var $browseBoard = $('.browse-board')
 var map1 = document.getElementById('map1') ;
 var addForm = document.querySelector('.addForm') ;
 var viewJournal = document.querySelector('.viewJournal')
+var nearbyList = document.querySelector('.nearbyList')
 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 var trichy = {lat: 10.75, lng: 78.19};
+var markerToFindNearby ;
+var destinations = '' ;
+var origins= '' ;
+response = null ;
 $create.click(function(){
 	$createBoard.css('display','block')
 	$browseBoard.css('display','none')
@@ -21,14 +26,37 @@ $browse.click(function(){
     });
    map2.addListener('click',function(e){
    	map2.panTo({lat:e.latLng.lat(),lng: e.latLng.lng()})
-   	var markerToFindNearby = new google.maps.Marker({
+   	if(markerToFindNearby){
+   		markerToFindNearby.setMap(null)
+   	}
+   	markerToFindNearby = new google.maps.Marker({
    		position:e.latLng,
    		map:map2,
    		icon: image
    	})
-   	$.get('/serve_json/public_journals',function(responseText){
-   		
+   	origins = e.latLng.lat() +','+e.latLng.lng() ;
+   	$.get('/serve_json/nearby_journals',{
+      position: origins.replace(',','-')
+    },function(responseText){
+      var journals = responseText.journalsNearby ;
+      nearbyList.innerHTML = ''
+      for(var i=0 ;i<journals.length ;i++ ){
+        var header = document.createElement('h2')
+        var container = document.createElement('div')
+        var content = document.createElement('p')
+        content.setAttribute('class', 'detailNearby')
+        var nearbyJournal = document.createElement('div') ;
+        nearbyJournal.setAttribute('class', 'nearbyJournal') ;
+        console.log(journals[i])
+        header.innerHTML = journals[i].header ;
+        content.innerHTML ='BY:'+"<br/>"+ journals[i].author ;
+        container.appendChild(content)
+        nearbyJournal.appendChild(header);
+        nearbyJournal.appendChild(container) ;
+        nearbyList.appendChild(nearbyJournal) ;
+      }
    	})
+
    })
 
     $.get('/serve_json/public_journals', function(responseText){
@@ -74,3 +102,31 @@ window.onkeydown = function(e){
 		addForm.style.display = 'none' ;
 	}
 }
+/*
+var journals = responseText.journals ;
+      var success = responseText.success ;
+      var length = journals.length ;
+      var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&';
+      for(var i=0 ;i<length ;i++){
+        var latLng = journals[i].position.replace('-',',');
+        if(i<length-1){
+          destinations = destinations + latLng +'|';
+        }else{
+          destinations += latLng ;
+        }
+      }
+      var urlWithParams = url += 'origins=' + origins +'&destinations=' +destinations+'&key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ' ; 
+      console.log(urlWithParams);
+      
+      var request = createCORSRequest("get", urlWithParams);
+      if (request){
+        request.setRequestHeader('origin', 'localhost:3000')
+          request.onload = function() {
+            if(this.status === 200 && this.readyState===4){
+             document.body.innerHTML = responseText ;
+            }
+          };
+        request.send();
+    }
+
+*/
