@@ -1,7 +1,10 @@
 *{
 	transition-duration: 0.5s ;
 }
-body{
+body{    
+
+    font-family: 'Amatic SC', Monospace;
+
 	margin:30px auto;
 	text-align: center ;
 	background-image: url('/images/bg1.jpeg');
@@ -48,7 +51,11 @@ input, select{
 	clear: both ;
 }
 .browse-board{
-	display: none ;	
+	display: none ;
+}
+.create-board{
+
+	display: block; 
 }
 .board{
 	margin-top: 30px ;
@@ -60,7 +67,7 @@ input, select{
 	height: 400px ;
 }
 .addForm{
-	display: block; 
+	display: none; 
 	margin-top:-50px;
 	width: 100% ;
 	text-align: center;
@@ -97,4 +104,20 @@ textarea{
 	background-color: grey ;
 	padding: 10px ;
 	border-radius: 8px ;
+}
+.nearbyList{
+	float: left;
+	width: 30% ;
+	height: 200px ;
+}
+.viewJournal{
+	float: left;
+	width: 70% ;
+	height: 200px ;
+	text-align: center; 
+}
+
+.viewJournal pre{
+	background: none ;
+	font-family: 'Fondamento', cursive;
 }
