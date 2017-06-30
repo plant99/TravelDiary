@@ -3,7 +3,7 @@
 }
 body{    
 
-    font-family: 'Amatic SC', Monospace;
+    font-family: 'Shadows Into Light', Monospace;
 
 	margin:30px auto;
 	text-align: center ;
@@ -33,6 +33,7 @@ input, select{
 	text-decoration: none ;
 }
 .tab{
+	font-size: 20px ;
 	color: cyan ;
 	width: 10% ;
 	background-color: grey ;
@@ -91,6 +92,7 @@ textarea{
 	width:25%;
 }
 .message{
+	font-size: 20px ;
 	border-radius: 10px ;
 	margin-left: 25% ;
 	width: 50% ;
@@ -107,17 +109,41 @@ textarea{
 }
 .nearbyList{
 	float: left;
-	width: 30% ;
+	width: 25% ;
 	height: 200px ;
+	margin-left: 5% ;
 }
 .viewJournal{
 	float: left;
-	width: 70% ;
+	width: 65% ;
 	height: 200px ;
-	text-align: center; 
+	text-align: left; 
+	padding:10px ;
+	margin-left: 5% ;
 }
 
 .viewJournal pre{
 	background: none ;
 	font-family: 'Fondamento', cursive;
+	/*color: #e06726 ;*/
+	color:#381117;
+	font-size: 20px ;
+}
+.nearbyList pre{
+	background: none;
+	font-family: 'Fondamento', cursive;
+
+}
+h2{
+	color: red ;
+	text-align: center; 
+}
+.nearbyJournal{
+	margin-top: 20px ;
+	background-color: yellow ;
+	border: 1px solid grey;
+	border-radius: 5px ;
+}
+.nearbyJournal:hover{
+	cursor: pointer;
 }
