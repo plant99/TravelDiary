@@ -116,7 +116,6 @@ textarea{
 .viewJournal{
 	float: left;
 	width: 65% ;
-	height: 200px ;
 	text-align: left; 
 	padding:10px ;
 	margin-left: 5% ;
@@ -126,12 +125,15 @@ textarea{
 	background: none ;
 	font-family: 'Fondamento', cursive;
 	/*color: #e06726 ;*/
-	color:#381117;
+	color:cyan;
 	font-size: 20px ;
+	white-space: pre-wrap; 
+	background-color: rgba(128,128,128,0.7)
 }
 .nearbyList pre{
 	background: none;
 	font-family: 'Fondamento', cursive;
+	white-space: pre-wrap; 
 
 }
 h2{
