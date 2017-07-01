@@ -78,7 +78,27 @@ $browse.click(function(){
               footer.innerHTML = 'author: ' + responseText.journal.author + '<br>Created on: ' + responseText.journal.date.slice(0,10) ;
               container.appendChild(content)
               viewJournal.appendChild(header);
+              if(responseText.journal.image){
+                var image = document.createElement('img')
+                image.src = '/serve_image/'+responseText.journal.image;
+                viewJournal.appendChild(image)
+              }
               viewJournal.appendChild(container) ;
+              var journal = responseText.journal ;
+
+              if(journal.links.length){
+                var h3 = document.createElement('h3')
+                h3.innerHTML = 'LINKS FOR MORE COOL DATA'
+                viewJournal.appendChild(h3)
+                var ul = document.createElement('ul')
+                for(var j=0 ;j<journal.links.length ;j++){
+                  var li = document.createElement('li') ;
+                  li.innerHTML = journal.links[j] ;
+                  ul.appendChild(li)
+                }
+                viewJournal.appendChild(ul) ;
+              }
+              viewJournal.appendChild(footer)
             })
 
           }else{
@@ -99,7 +119,26 @@ $browse.click(function(){
               footer.innerHTML = 'author: ' + responseText.journal.author + '<br>Created on: ' + responseText.journal.date.slice(0,10) ;
               container.appendChild(content)
               viewJournal.appendChild(header);
+              if(responseText.journal.image){
+                var image = document.createElement('img')
+                image.src = '/serve_image/'+responseText.journal.image;
+                viewJournal.appendChild(image)
+              }
               viewJournal.appendChild(container) ;
+              var journal = responseText.journal ;
+
+              if(journal.links.length){
+                var h3 = document.createElement('h3')
+                h3.innerHTML = 'LINKS FOR MORE COOL DATA'
+                viewJournal.appendChild(h3)
+                var ul = document.createElement('ul')
+                for(var j=0 ;j<journal.links.length ;j++){
+                  var li = document.createElement('li') ;
+                  li.innerHTML = journal.links[j] ;
+                  ul.appendChild(li)
+                }
+                viewJournal.appendChild(ul) ;
+              }
               viewJournal.appendChild(footer)
             })
           }
@@ -141,8 +180,27 @@ $browse.click(function(){
                 content.innerHTML = journals[i].content ;
                 container.appendChild(content)
                 viewJournal.appendChild(header);
+                if(journals[i].image){
+                  var image = document.createElement('img')
+                  image.src = '/serve_image/'+journals[i].image;
+                  viewJournal.appendChild(image)
+                }
                 viewJournal.appendChild(container) ;
+                if(journals[i].links.length){
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'LINKS FOR MORE COOL DATA'
+                  viewJournal.appendChild(h3)
+                  var ul = document.createElement('ul')
+                  for(var j=0 ;j<journals[i].links.length ;j++){
+                    var li = document.createElement('li') ;
+                    li.innerHTML = journals[i].links[j] ;
+                    ul.appendChild(li)
+                  }
+                  viewJournal.appendChild(ul) ;
+                }
+
                 viewJournal.appendChild(footer)
+
                 console.log('Done da')
               }
     				})
