@@ -44,7 +44,34 @@
       <div class="dummy"></div>
 		</div>
 
-    <div class="profiles-board board">3</div>
+    <div class="profiles-board board">
+
+      <div class="search">
+        <p>Search usernames:
+          <input type="text" name="search_username" class="search_username">
+          <span>
+            <img src="/images/glyphicons/png/glyphicons-28-search.png">
+          </span>
+        </p>
+      </div>
+      <div class="profile">
+        <h2>Hey <%= name %></h2>
+        <%if(journals.length){%>
+        <p>Following are your journals</p>
+        <ul>
+        <%for(var i=0;i< journals.length ;i++){%>  
+          <li class="journal_header_profile" data="<%= journals[i]._id %>"><%= journals[i].header %></li>
+        <%}%>
+        </ul>
+        <%}else{%>
+        <p>Oops, you have no journals</p>
+        <%}%>
+      </div>
+      <div class="journalSelected">
+        Alpha
+      </div>
+      <div class="dummy"></div>
+    </div>
 
 	</div>
 
