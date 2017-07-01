@@ -1,7 +1,9 @@
 var $create = $('.create')
 var $browse = $('.browse')
+var $profiles = $('.profiles')
 var $createBoard = $('.create-board')
 var $browseBoard = $('.browse-board')
+var $profilesBoard = $('.profiles-board')
 var map1 = document.getElementById('map1') ;
 var addForm = document.querySelector('.addForm') ;
 var viewJournal = document.querySelector('.viewJournal')
@@ -15,10 +17,18 @@ response = null ;
 $create.click(function(){
 	$createBoard.css('display','block')
 	$browseBoard.css('display','none')
+  $profilesBoard.css('display', 'none')
+})
+
+$profiles.click(function(){
+  $createBoard.css('display','none')
+  $browseBoard.css('display','none')
+  $profilesBoard.css('display', 'block')
 })
 $browse.click(function(){
 	$createBoard.css('display','none')
 	$browseBoard.css('display','block')
+  $profilesBoard.css('display', 'none')
 
    map2 = new google.maps.Map(document.getElementById('map2'), {
       zoom: 4,
@@ -209,7 +219,6 @@ $browse.click(function(){
     	}
     })
 })
-
 function showForm(){
 	addForm.style.display = 'block' ;
 }
