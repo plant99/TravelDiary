@@ -2,7 +2,9 @@ var express = require('express')
 var router = express.Router() ;
 var fileUpload = require('express-fileupload')
 router.get('/',function(req, res, next){
-	res.render('dashboard',{message:''})
+	Journal.find({author: req.decoded._doc.username}, function(err, journals){
+		res.render('dashboard',{message:'',name:req.decoded._doc.username,journals: journals})
+	})
 })
 var journal ;
 router.post('/',function(req, res, next){
@@ -10,7 +12,9 @@ router.post('/',function(req, res, next){
 	Journal.findOne({header: req.body.title, position: req.body.position, date: new Date(), author: req.decoded._doc.username}, function(err, journalCheck){
 		if(journalCheck){
 			console.log(journalCheck)
-			res.render('dashboard',{message:'Sorry, a journal with the same parameters exists.'})
+			Journal.find({author: req.decoded._doc.username}, function(err, journals){
+				res.render('dashboard',{message:'',name:req.decoded._doc.username, journals:journals})
+			})
 		}else{
 			console.log(req.params)
 			var links, sampleFile = req.files.image ;
