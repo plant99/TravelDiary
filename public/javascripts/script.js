@@ -57,6 +57,7 @@ $browse.click(function(){
         nearbyJournal.appendChild(header);
         nearbyJournal.appendChild(content) ;
         nearbyList.appendChild(nearbyJournal) ;
+        nearbyJournal.setAttribute('id',journals[i]._id)
 
         //onclick event handler for nearbyJournal
         nearbyJournal.onclick = function(e){
@@ -65,25 +66,41 @@ $browse.click(function(){
             var header = e.target.childNodes[0].innerHTML ;
             var author = e.target.childNodes[1].innerHTML.slice(3)
             var position = e.target.getAttribute('data-pos') ;
-
-
-          }else{
-            //for his children
-            var parent = e.target.parentNode ;
-
-            var header = parent.childNodes[0].innerHTML ;
-            var author = parent.childNodes[1].innerHTML.slice(3)
-            var position = parent.getAttribute('data-pos') ;
-            $.post('/serve_json/journal_details',{lat_lng: position}, function(responseText){
+            console.log(author, position)
+            $.post('/serve_json/journal_single_details',{_id:e.target.getAttribute('id')}, function(responseText){
               viewJournal.innerHTML = ''
               var header = document.createElement('h1')
               var container = document.createElement('pre')
               var content = document.createElement('div')
               header.innerHTML = responseText.journal.header ;
               content.innerHTML = responseText.journal.content ;
+              var footer = document.createElement('footer')
+              footer.innerHTML = 'author: ' + responseText.journal.author + '<br>Created on: ' + responseText.journal.date.slice(0,10) ;
               container.appendChild(content)
               viewJournal.appendChild(header);
               viewJournal.appendChild(container) ;
+            })
+
+          }else{
+            //for its children
+            var parent = e.target.parentNode ;
+
+            var header = parent.childNodes[0].innerHTML ;
+            var author = parent.childNodes[1].innerHTML.slice(3)
+            var position = parent.getAttribute('data-pos') ;
+            $.post('/serve_json/journal_single_details',{_id:parent.getAttribute('id')}, function(responseText){
+              viewJournal.innerHTML = ''
+              var header = document.createElement('h1')
+              var container = document.createElement('pre')
+              var content = document.createElement('div')
+              header.innerHTML = responseText.journal.header ;
+              content.innerHTML = responseText.journal.content ;
+              var footer = document.createElement('footer')
+              footer.innerHTML = 'author: ' + responseText.journal.author + '<br>Created on: ' + responseText.journal.date.slice(0,10) ;
+              container.appendChild(content)
+              viewJournal.appendChild(header);
+              viewJournal.appendChild(container) ;
+              viewJournal.appendChild(footer)
             })
           }
         }
@@ -111,14 +128,23 @@ $browse.click(function(){
     				var queryPosition = e.latLng.lat()+'-'+ e.latLng.lng()
     				$.post('/serve_json/journal_details',{lat_lng:queryPosition}, function(responseText){
     					viewJournal.innerHTML = ''
-    					var header = document.createElement('h1')
-    					var container = document.createElement('pre')
-    					var content = document.createElement('div')
-    					header.innerHTML = responseText.journal.header ;
-    					content.innerHTML = responseText.journal.content ;
-    					container.appendChild(content)
-    					viewJournal.appendChild(header);
-    					viewJournal.appendChild(container) ;
+              journals = responseText.journals ;
+              console.log(journals)
+              console.log('Starting doing', journals.length)
+    					for(var i=0 ;i< journals.length ;i++){
+                var header = document.createElement('h1')
+                var container = document.createElement('pre')
+                var content = document.createElement('div')
+                var footer = document.createElement('footer')
+                footer.innerHTML = 'author: ' + journals[i].author + '<br>Created on: ' + journals[i].date.slice(0,10) ;
+                header.innerHTML = journals[i].header ;
+                content.innerHTML = journals[i].content ;
+                container.appendChild(content)
+                viewJournal.appendChild(header);
+                viewJournal.appendChild(container) ;
+                viewJournal.appendChild(footer)
+                console.log('Done da')
+              }
     				})
     			})
     		}
