@@ -7,5 +7,7 @@ module.exports = mongoose.model('journal', new Schema({
 	position: String,
 	type: String,
 	author: String,
-	date: Date 
+	date: Date,
+	links : Array,
+	image: String 
 }))
