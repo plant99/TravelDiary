@@ -117,7 +117,7 @@ textarea{
 	float: left;
 	width: 65% ;
 	text-align: left; 
-	padding:10px ;
+	padding:20px ;
 	margin-left: 5% ;
 }
 
@@ -136,16 +136,23 @@ textarea{
 	white-space: pre-wrap; 
 
 }
-h2{
+h1{
 	color: red ;
 	text-align: center; 
 }
+h2{
+	color: red ;
+	text-align: center; 	
+}
 .nearbyJournal{
 	margin-top: 20px ;
-	background-color: yellow ;
+	background-color: rgba(255, 255, 0, 0.8) ;
 	border: 1px solid grey;
 	border-radius: 5px ;
 }
 .nearbyJournal:hover{
 	cursor: pointer;
+}
+pre{
+	border: none;
 }
