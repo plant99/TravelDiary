@@ -43,7 +43,7 @@ router.get('/nearby_journals', function(req, res, next){
 		}
 
 		var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='
-		var urlWithParams = url + origins + '&destinations=' +destinations +'&key=AIzaSyCWgSeojkToJ_M9K70mM-GkC-UijpHHjtQ' ;
+		var urlWithParams = url + origins + '&destinations=' +destinations +'&key=AIzaSyDGF1-bEwFPBiQajKUn1Q23Wb1dvCPTFqk ' ;
 		console.log(urlWithParams)
 		var journalsNearby = [] ;
 		request(urlWithParams, function(error, response, body){
@@ -53,7 +53,9 @@ router.get('/nearby_journals', function(req, res, next){
 		  	if(body){
 		  		var body= JSON.parse(body)
 		  	}
-		  	var elements = body.rows[0].elements 
+		  	if(body.rows[0].elements){
+			  	var elements = body.rows[0].elements 
+		  	}
 		  	console.log(elements)
 		  	for(var i=0 ;i<elements.length ;i++ ){
 		  		console.log(elements[i].status)
