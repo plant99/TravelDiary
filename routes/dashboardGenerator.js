@@ -6,7 +6,7 @@ router.get('/',function(req, res, next){
 })
 router.post('/',function(req, res, next){
 	console.log('Post recieved')
-	Journal.findOne({header: req.body.title, position: req.body.position}, function(err, journalCheck){
+	Journal.findOne({header: req.body.title, position: req.body.position, date: new Date(), author: req.decoded._doc.username}, function(err, journalCheck){
 		if(journalCheck){
 			console.log(journalCheck)
 			res.render('dashboard',{message:'Sorry, a journal with the same parameters exists.'})
@@ -17,7 +17,8 @@ router.post('/',function(req, res, next){
 				content: req.body.journal,
 				position: req.body.position,
 				type: req.body.type,
-				author: req.decoded._doc.username
+				author: req.decoded._doc.username,
+				date: new Date() 
 			})
 			console.log(journal)
 			journal.save(function(err, journalSaved){
