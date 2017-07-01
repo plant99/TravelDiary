@@ -13,6 +13,7 @@ var trichy = {lat: 10.75, lng: 78.19};
 var markerToFindNearby ;
 var destinations = '' ;
 var origins= '' ;
+var journalSelected = document.querySelector('.journalSelected')
 response = null ;
 $create.click(function(){
 	$createBoard.css('display','block')
@@ -228,6 +229,55 @@ window.onkeydown = function(e){
 		addForm.style.display = 'none' ;
 	}
 }
+
+loadProfile()
+
+//add click handlers to the journal_header_profile
+function loadProfile(){
+  var journalHeaderProfiles = document.querySelectorAll('.journal_header_profile')
+  if(journalHeaderProfiles.length){
+    for(var i=0 ;i< journalHeaderProfiles.length ;i++){
+      journalHeaderProfiles[i].onclick = function(e){
+        $.post('/serve_json/journal_single_details',{_id:e.target.getAttribute('data')}, function(responseText){
+
+            journalSelected.innerHTML = '' ;
+            var journal = responseText.journal ;
+            var header = document.createElement('h1')
+            var container = document.createElement('pre')
+            var content = document.createElement('div')
+            var footer = document.createElement('footer')
+            footer.innerHTML = 'author: ' + journal.author + '<br>Created on: ' + journal.date.slice(0,10) ;
+            header.innerHTML = journal.header ;
+            content.innerHTML = journal.content ;
+            container.appendChild(content)
+            journalSelected.appendChild(header);
+            if(journal.image){
+              var image = document.createElement('img')
+              image.src = '/serve_image/'+journal.image;
+              journalSelected.appendChild(image)
+            }
+            journalSelected.appendChild(container) ;
+            if(journal.links.length){
+              var h3 = document.createElement('h3')
+              h3.innerHTML = 'LINKS FOR MORE COOL DATA'
+              journalSelected.appendChild(h3)
+              var ul = document.createElement('ul')
+              for(var j=0 ;j<journal.links.length ;j++){
+                var li = document.createElement('li') ;
+                li.innerHTML = journal.links[j] ;
+                ul.appendChild(li)
+              }
+              journalSelected.appendChild(ul) ;
+            }
+
+            journalSelected.appendChild(footer)
+        })
+      }
+    }
+  }
+}
+
+
 /*
 var journals = responseText.journals ;
       var success = responseText.success ;
