@@ -40,20 +40,53 @@ $browse.click(function(){
     },function(responseText){
       var journals = responseText.journalsNearby ;
       nearbyList.innerHTML = ''
+      //create Title for the post
+      var header = document.createElement('h2')
+      header.innerHTML = 'JOURNALS MADE NEARBY' ;
+      nearbyList.appendChild(header)
       for(var i=0 ;i<journals.length ;i++ ){
         var header = document.createElement('h2')
-        var container = document.createElement('div')
         var content = document.createElement('p')
         content.setAttribute('class', 'detailNearby')
         var nearbyJournal = document.createElement('div') ;
         nearbyJournal.setAttribute('class', 'nearbyJournal') ;
+        nearbyJournal.setAttribute('data-pos', journals[i].position) ;
         console.log(journals[i])
         header.innerHTML = journals[i].header ;
-        content.innerHTML ='BY:'+"<br/>"+ journals[i].author ;
-        container.appendChild(content)
+        content.innerHTML ='BY: '+ journals[i].author ;
         nearbyJournal.appendChild(header);
-        nearbyJournal.appendChild(container) ;
+        nearbyJournal.appendChild(content) ;
         nearbyList.appendChild(nearbyJournal) ;
+
+        //onclick event handler for nearbyJournal
+        nearbyJournal.onclick = function(e){
+          if(e.target.getAttribute('class') === 'nearbyJournal'){
+            //for div
+            var header = e.target.childNodes[0].innerHTML ;
+            var author = e.target.childNodes[1].innerHTML.slice(3)
+            var position = e.target.getAttribute('data-pos') ;
+
+
+          }else{
+            //for his children
+            var parent = e.target.parentNode ;
+
+            var header = parent.childNodes[0].innerHTML ;
+            var author = parent.childNodes[1].innerHTML.slice(3)
+            var position = parent.getAttribute('data-pos') ;
+            $.post('/serve_json/journal_details',{lat_lng: position}, function(responseText){
+              viewJournal.innerHTML = ''
+              var header = document.createElement('h1')
+              var container = document.createElement('pre')
+              var content = document.createElement('div')
+              header.innerHTML = responseText.journal.header ;
+              content.innerHTML = responseText.journal.content ;
+              container.appendChild(content)
+              viewJournal.appendChild(header);
+              viewJournal.appendChild(container) ;
+            })
+          }
+        }
       }
    	})
 
@@ -78,7 +111,7 @@ $browse.click(function(){
     				var queryPosition = e.latLng.lat()+'-'+ e.latLng.lng()
     				$.post('/serve_json/journal_details',{lat_lng:queryPosition}, function(responseText){
     					viewJournal.innerHTML = ''
-    					var header = document.createElement('h2')
+    					var header = document.createElement('h1')
     					var container = document.createElement('pre')
     					var content = document.createElement('div')
     					header.innerHTML = responseText.journal.header ;
