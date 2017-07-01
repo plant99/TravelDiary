@@ -249,3 +249,6 @@ ul li{
 	padding-bottom: 20px ;
 	border-radius: 3px ;
 }
+.submit_username_search:hover{
+	cursor: pointer;
+}
