@@ -14,6 +14,7 @@ var markerToFindNearby ;
 var destinations = '' ;
 var origins= '' ;
 var journalSelected = document.querySelector('.journalSelected')
+var profile = document.querySelector('.profile')
 response = null ;
 $create.click(function(){
 	$createBoard.css('display','block')
@@ -275,6 +276,40 @@ function loadProfile(){
       }
     }
   }
+}
+
+var submitUsernameSearch = document.querySelector('.submit_username_search') ;
+submitUsernameSearch.onclick = function(){
+    var username = $('.search_username').val() ;
+    var loggedUser = document.querySelector('.profile h2').innerHTML
+    profile.innerHTML = ''
+    $.get('/serve_json/user_journals/'+username, function(response){
+        var journals = response.journals ;
+
+        var h2 = document.createElement('h2') ;
+        h2.innerHTML = loggedUser ;
+        profile.appendChild(h2) ; 
+
+        if(journals.length){
+          var p = document.createElement('p') ;
+          p.innerHTML = 'Following are the journals '+ username +' created:'
+          var ul = document.createElement('ul') ;
+          for(var i=0 ;i<journals.length ;i++){
+            var li = document.createElement('li') ;
+            li.innerHTML = journals[i].header ;
+            li.setAttribute('data', journals[i]._id) ;
+            li.setAttribute('class','journal_header_profile')
+            ul.appendChild(li)
+          }
+          profile.appendChild(p) ;
+          profile.appendChild(ul) ;
+        }else{
+          var p = document.createElement('p') ;
+          p.innerHTML = 'Oops, we found no Journals from ' + username ;
+          profile.appendChild(p)
+        }
+        loadProfile()
+    })
 }
 
 
