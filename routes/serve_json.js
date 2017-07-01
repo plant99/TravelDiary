@@ -1,7 +1,14 @@
 var express = require('express')
 var router = express.Router() ;
 // for making http requests
+//Two phase below to be found later not important, 
 var request = require('request');
+router.get('/user_journals/:username', function(req, res, next){
+	Journal.find({author: req.params.username}, function(err, journals){
+		res.json({journals: journals})
+	})
+})
+
 router.get('/public_journals', function(req, res, next){
 	Journal.find({type:'public'}, function(err, journals){
 		if(err){
