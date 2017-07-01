@@ -156,3 +156,8 @@ h2{
 pre{
 	border: none;
 }
+.viewJournal footer{
+	padding: 10px ;
+	text-align: right; 
+	background-color: rgba(255,255,255, 0.7)
+}
