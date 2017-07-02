@@ -19,6 +19,7 @@ var loginHandler = require('./routes/loginHandler.js')
 var signUpHandler = require('./routes/signUpHandler.js')
 var dashboardGenerator = require('./routes/dashboardGenerator.js')
 var serve_json = require('./routes/serve_json')
+var stats = require('./routes/stats.js')
 
 //require middlewares
 
@@ -53,6 +54,7 @@ app.get('/serve_image/:name', function(req, res, next){
      res.end(image, 'binary');
 	console.log(req.params.name, 'wtf')
 })
+app.use('/stats', stats)
 app.use(function(err, req, res, next) {
 	console.log(err)
   // set locals, only providing error in development
