@@ -8,6 +8,15 @@
 	padding-bottom: 20px ;
 	border-radius: 3px ;
 }
+.viewJournal p span .like{
+	width:35px !important; 
+	height: 45px !important;
+	margin-top:10px;
+	margin-left: 10px ;
+}
+.viewJournal p span .like:hover{
+	cursor: pointer; 
+}
 body{    
 
     font-family: 'Shadows Into Light', Monospace;
