@@ -3,6 +3,29 @@ var router = express.Router() ;
 // for making http requests
 //Two phase below to be found later not important, 
 var request = require('request');
+
+router.get('/uname_suggestions/:username', function(req, res, next){
+	//write code to suggest five usernames at max and 0 at least
+	var given = req.params.username ;
+	var usernames = [] ;
+	var toBeSent = [] ;
+	var index = 0 ;
+	User.find({},'username', {sort:{username:-1}}, function(err, usernamesFromDb){
+		for(var i=0;i< usernamesFromDb.length ;i++){
+			if(usernamesFromDb[i].username.indexOf(given) == 0){
+				usernames.push(usernamesFromDb[i].username) ;
+			}
+		}
+		usernames = usernames.sort();
+		console.log(usernames)
+		if(usernames.length<=5){
+			res.json({usernames: usernames})
+		}else{
+			res.json({usernames: usernames.slice(0,5)})
+		}
+	})
+})
+
 router.get('/user_journals/:username', function(req, res, next){
 	Journal.find({author: req.params.username}, function(err, journals){
 		res.json({journals: journals})
