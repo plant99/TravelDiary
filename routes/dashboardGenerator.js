@@ -13,7 +13,7 @@ router.post('/',function(req, res, next){
 		if(journalCheck){
 			console.log(journalCheck)
 			Journal.find({author: req.decoded._doc.username}, function(err, journals){
-				res.render('dashboard',{message:'',name:req.decoded._doc.username, journals:journals})
+				res.render('dashboard',{message:'The journal with the same params exist',name:req.decoded._doc.username, journals:journals})
 			})
 		}else{
 			console.log(req.params)
@@ -22,10 +22,6 @@ router.post('/',function(req, res, next){
 			if(req.body.links){
 				links = req.body.links.split('\n') ;
 			}
-			
-
-			
-
 
 			if(sampleFile){
 				sampleFile.mv(__dirname+'/../imgForJournals/'+req.body.title+req.decoded._doc.username+'.'+req.files.image.name.split('.')[1], function(err) {
@@ -39,14 +35,18 @@ router.post('/',function(req, res, next){
 						author: req.decoded._doc.username,
 						date: new Date(),
 						links: links ,
-						image: ''
+						image: '',
+						votes: {number: 0 ,users:[] },
+						comments: []
 					})
 					journal.save(function(err, journalSaved){
 						console.log(journalSaved) ;
 						User.findOne({username: journalSaved.author},function(err, user){
 							user.journals.push({header:journalSaved.header, position:journalSaved.position})
 							user.save(function(err, savedUser){
-								res.render('dashboard',{message:'Your journal was successfully saved'})
+								Journal.find({author:req.decoded._doc.username},function(err, journals){
+									res.render('dashboard',{message:'Your journal was successfully saved', name: req.decoded._doc.username, journals:journals})
+								})								
 							})
 						})
 					})
@@ -59,14 +59,18 @@ router.post('/',function(req, res, next){
 							author: req.decoded._doc.username,
 							date: new Date(),
 							links: links ,
-							image: req.body.title+req.decoded._doc.username+'.'+req.files.image.name.split('.')[1] 
+							image: req.body.title+req.decoded._doc.username+'.'+req.files.image.name.split('.')[1] ,
+							votes: {number: 0 ,users:[] },
+							comments: []
 						})
 						journal.save(function(err, journalSaved){
 							console.log(journalSaved) ;
 							User.findOne({username: journalSaved.author},function(err, user){
 								user.journals.push({header:journalSaved.header, position:journalSaved.position})
 								user.save(function(err, savedUser){
-									res.render('dashboard',{message:'Your journal was successfully saved'})
+									Journal.find({author:req.decoded._doc.username},function(err, journals){
+										res.render('dashboard',{message:'Your journal was successfully saved', name: req.decoded._doc.username, journals:journals})
+									})
 								})
 							})
 						})
@@ -81,14 +85,16 @@ router.post('/',function(req, res, next){
 					author: req.decoded._doc.username,
 					date: new Date(),
 					links: links ,
-					image: ''
+					image: '',
+					votes: {number: 0 ,users:[] },
+					comments: []
 				})
 				journal.save(function(err, journalSaved){
 					console.log(journalSaved) ;
 					User.findOne({username: journalSaved.author},function(err, user){
 						user.journals.push({header:journalSaved.header, position:journalSaved.position})
-						user.save(function(err, savedUser){
-							res.render('dashboard',{message:'Your journal was successfully saved'})
+						Journal.find({author:req.decoded._doc.username},function(err, journals){
+							res.render('dashboard',{message:'Your journal was successfully saved', name: req.decoded._doc.username, journals:journals})
 						})
 					})
 				})
