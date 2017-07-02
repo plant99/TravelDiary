@@ -111,6 +111,29 @@ $browse.click(function(){
                 viewJournal.appendChild(ul) ;
               }
               viewJournal.appendChild(footer)
+              var p = document.createElement('p') ;
+              p.innerHTML = 'Liked it? Give it a vote'
+              var span = document.createElement('span');
+              span.setAttribute('class', 'vote') ;
+              span.setAttribute('data',journal._id)
+              span.innerHTML = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+journal.votes.number+')'
+              span.onclick = function(e){
+                if(e.target.getAttribute('class') === 'like'){
+                  var id = e.target.parentNode.getAttribute('data') ;
+                  $.post('/stats/add_like/',{id:id}, function(response){
+                    console.log(response)
+                  })
+                }else{
+                  var id = e.target.getAttribute('data') ;
+                  $.post('/stats/add_like',{id:id}, function(response){
+                    span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
+                  })
+                }
+                span.onclick = null ;
+              }
+              p.appendChild(span)
+              viewJournal.appendChild(p)
+              console.log('Done da')
             })
 
           }else{
@@ -152,6 +175,29 @@ $browse.click(function(){
                 viewJournal.appendChild(ul) ;
               }
               viewJournal.appendChild(footer)
+              var p = document.createElement('p') ;
+              p.innerHTML = 'Liked it? Give it a vote'
+              var span = document.createElement('span');
+              span.setAttribute('class', 'vote') ;
+              span.setAttribute('data',journal._id)
+              span.innerHTML = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+journal.votes.number+')'
+              span.onclick = function(e){
+                if(e.target.getAttribute('class') === 'like'){
+                  var id = e.target.parentNode.getAttribute('data') ;
+                  $.post('/stats/add_like/',{id:id}, function(response){
+                    console.log(response)
+                  })
+                }else{
+                  var id = e.target.getAttribute('data') ;
+                  $.post('/stats/add_like',{id:id}, function(response){
+                    span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
+                  })
+                }
+                span.onclick = null ;
+              }
+              p.appendChild(span)
+              viewJournal.appendChild(p)
+              console.log('Done da')
             })
           }
         }
@@ -212,7 +258,28 @@ $browse.click(function(){
                 }
 
                 viewJournal.appendChild(footer)
-
+                var p = document.createElement('p') ;
+                p.innerHTML = 'Liked it? Give it a vote'
+                var span = document.createElement('span');
+                span.setAttribute('class', 'vote') ;
+                span.setAttribute('data',journals[i]._id)
+                span.innerHTML = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+journals[i].votes.number+')'
+                span.onclick = function(e){
+                  if(e.target.getAttribute('class') === 'like'){
+                    var id = e.target.parentNode.getAttribute('data') ;
+                    $.post('/stats/add_like/',{id:id}, function(response){
+                      console.log(response)
+                    })
+                  }else{
+                    var id = e.target.getAttribute('data') ;
+                    $.post('/stats/add_like',{id:id}, function(response){
+                      span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
+                    })
+                  }
+                  span.onclick = null ;
+                }
+                p.appendChild(span)
+                viewJournal.appendChild(p)
                 console.log('Done da')
               }
     				})
