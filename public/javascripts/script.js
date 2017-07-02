@@ -312,6 +312,17 @@ submitUsernameSearch.onclick = function(){
     })
 }
 
+//
+var search_username = document.querySelector('.search_username') ;
+search_username.onkeyup = function(){
+  if(search_username.value){
+    console.log(search_username.value)
+    $.get('/serve_json/uname_suggestions/'+search_username.value, function(response){
+      console.log(response)
+    })
+  }
+}
+
 
 /*
 var journals = responseText.journals ;
