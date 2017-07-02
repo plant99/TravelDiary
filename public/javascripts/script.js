@@ -316,9 +316,26 @@ submitUsernameSearch.onclick = function(){
 var search_username = document.querySelector('.search_username') ;
 search_username.onkeyup = function(){
   if(search_username.value){
+    var list = document.querySelector('.suggestionBox ul') ;
+    list.innerHTML = ''
     console.log(search_username.value)
     $.get('/serve_json/uname_suggestions/'+search_username.value, function(response){
-      console.log(response)
+      var usernames = response.usernames  ;
+      if(usernames.length){
+        for(var i=0 ;i< usernames.length;i++){
+          var li = document.createElement('li') ;
+          li.innerHTML = usernames[i] ;
+          li.onclick = function(e){
+            search_username.value = li.innerHTML ;
+            list.innerHTML = '' ;
+          }
+          list.appendChild(li)
+       }
+      }else{
+        var li = document.createElement('li') ;
+        li.innerHTML = 'Oops, no suggestion.' ;
+        list.appendChild(li)
+      }
     })
   }
 }
