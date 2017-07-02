@@ -9,5 +9,7 @@ module.exports = mongoose.model('journal', new Schema({
 	author: String,
 	date: Date,
 	links : Array,
-	image: String 
+	image: String,
+	votes: {number: Number, users: Array},
+	comments: Array
 }))
