@@ -252,3 +252,6 @@ ul li{
 .submit_username_search:hover{
 	cursor: pointer;
 }
+.nearbyJournal{
+	overflow-wrap: break-word; 
+}
