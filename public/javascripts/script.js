@@ -121,7 +121,7 @@ $browse.click(function(){
                 if(e.target.getAttribute('class') === 'like'){
                   var id = e.target.parentNode.getAttribute('data') ;
                   $.post('/stats/add_like/',{id:id}, function(response){
-                    console.log(response)
+                    span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
                   })
                 }else{
                   var id = e.target.getAttribute('data') ;
@@ -133,6 +133,43 @@ $browse.click(function(){
               }
               p.appendChild(span)
               viewJournal.appendChild(p)
+              var comments = journal.comments ;
+                if(comments.length){
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'Comments'
+                  var div = document.createElement('div') ;
+                  div.appendChild(h3)
+                  div.setAttribute('class','comments')
+                  for(var j=0;j<comments.length ;j++){
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = comments[j].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML = comments[j].comment ;
+                    div.appendChild(h4) ;
+                    div.appendChild(p)
+                  }
+                  viewJournal.appendChild(div)
+                }
+                var div = document.createElement('div')
+                div.setAttribute('class','addcomment') ;
+                var input = document.createElement('input')
+                input.setAttribute('class','comment')
+                input.setAttribute('type','text') ;
+                input.setAttribute('placeholder', 'Enter your comment here')
+                var button = document.createElement('button')
+                button.setAttribute('class','save');
+                button.setAttribute('data',journal._id)
+                button.innerHTML = 'Comment' ;
+                button.onclick = function(e){
+                  $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
+                    console.log(response)
+
+                  })
+                  $('.comment').val('')
+                }
+                div.appendChild(input) ;
+                div.appendChild(button) ;
+                viewJournal.appendChild(div) ;
               console.log('Done da')
             })
 
@@ -185,7 +222,7 @@ $browse.click(function(){
                 if(e.target.getAttribute('class') === 'like'){
                   var id = e.target.parentNode.getAttribute('data') ;
                   $.post('/stats/add_like/',{id:id}, function(response){
-                    console.log(response)
+                    span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
                   })
                 }else{
                   var id = e.target.getAttribute('data') ;
@@ -197,6 +234,43 @@ $browse.click(function(){
               }
               p.appendChild(span)
               viewJournal.appendChild(p)
+              var comments = journal.comments ;
+                if(comments.length){
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'Comments'
+                  var div = document.createElement('div') ;
+                  div.appendChild(h3)
+                  div.setAttribute('class','comments')
+                  for(var j=0;j<comments.length ;j++){
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = comments[j].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML = comments[j].comment ;
+                    div.appendChild(h4) ;
+                    div.appendChild(p)
+                  }
+                  viewJournal.appendChild(div)
+                }
+                var div = document.createElement('div')
+                div.setAttribute('class','addcomment') ;
+                var input = document.createElement('input')
+                input.setAttribute('class','comment')
+                input.setAttribute('type','text') ;
+                input.setAttribute('placeholder', 'Enter your comment here')
+                var button = document.createElement('button')
+                button.setAttribute('class','save');
+                button.setAttribute('data',journal._id)
+                button.innerHTML = 'Comment' ;
+                button.onclick = function(e){
+                  $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
+                    console.log(response)
+
+                  })
+                  $('.comment').val('')
+                }
+                div.appendChild(input) ;
+                div.appendChild(button) ;
+                viewJournal.appendChild(div) ;
               console.log('Done da')
             })
           }
@@ -268,7 +342,7 @@ $browse.click(function(){
                   if(e.target.getAttribute('class') === 'like'){
                     var id = e.target.parentNode.getAttribute('data') ;
                     $.post('/stats/add_like/',{id:id}, function(response){
-                      console.log(response)
+                      span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
                     })
                   }else{
                     var id = e.target.getAttribute('data') ;
@@ -280,7 +354,45 @@ $browse.click(function(){
                 }
                 p.appendChild(span)
                 viewJournal.appendChild(p)
+                
+                var comments = journals[i].comments ;
+                if(comments.length){
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'Comments'
+                  var div = document.createElement('div') ;
+                  div.appendChild(h3)
+                  div.setAttribute('class','comments')
+                  for(var j=0;j<comments.length ;j++){
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = comments[j].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML = comments[j].comment ;
+                    div.appendChild(h4) ;
+                    div.appendChild(p)
+                  }
+                  viewJournal.appendChild(div)
+                }
+                var div = document.createElement('div')
+                div.setAttribute('class','addcomment') ;
+                var input = document.createElement('input')
+                input.setAttribute('class','comment')
+                input.setAttribute('type','text') ;
+                input.setAttribute('placeholder', 'Enter your comment here')
+                var button = document.createElement('button')
+                button.setAttribute('class','save');
+                button.setAttribute('data',journals[i]._id)
+                button.innerHTML = 'Comment' ;
+                button.onclick = function(e){
+                  $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
+                    console.log(response)
+
+                  })
+                  $('.comment').val('')
+                }
                 console.log('Done da')
+                div.appendChild(input) ;
+                div.appendChild(button) ;
+                viewJournal.appendChild(div) ;
               }
     				})
     			})
