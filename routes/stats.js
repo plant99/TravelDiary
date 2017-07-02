@@ -18,5 +18,21 @@ router.post('/add_like', function(req, res, next){
 		}
 	})
 })
+router.post('/add_comment', function(req, res, next){
+	Journal.findOne({_id: req.body.id}, function(err, journal){
+		if(err){
+			console.log(err)
+		}else{
+			journal.comments.push({user: req.decoded._doc.username, comment: req.body.comment});
+			journal.save(function(err){
+				if(err){
+					console.log(err)
+				}else{
+					res.send(journal)
+				}
+			})
+		}
+	})
+})
 
 module.exports = router ;
