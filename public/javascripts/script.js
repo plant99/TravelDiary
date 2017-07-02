@@ -162,10 +162,16 @@ $browse.click(function(){
                 button.innerHTML = 'Comment' ;
                 button.onclick = function(e){
                   $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
-                    console.log(response)
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = response.comments[response.comments.length - 1].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML =  $('.comment').val();
+                    var commentsDiv = document.querySelector('.comments') ;
+                    commentsDiv.appendChild(h4) ;
+                    commentsDiv.appendChild(p) ;
+                    $('.comment').val('')
 
                   })
-                  $('.comment').val('')
                 }
                 div.appendChild(input) ;
                 div.appendChild(button) ;
@@ -263,10 +269,16 @@ $browse.click(function(){
                 button.innerHTML = 'Comment' ;
                 button.onclick = function(e){
                   $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
-                    console.log(response)
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = response.comments[response.comments.length - 1].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML =  $('.comment').val();
+                    var commentsDiv = document.querySelector('.comments') ;
+                    commentsDiv.appendChild(h4) ;
+                    commentsDiv.appendChild(p) ;
+                    $('.comment').val('')
 
                   })
-                  $('.comment').val('')
                 }
                 div.appendChild(input) ;
                 div.appendChild(button) ;
@@ -299,7 +311,7 @@ $browse.click(function(){
     				var queryPosition = e.latLng.lat()+'-'+ e.latLng.lng()
     				$.post('/serve_json/journal_details',{lat_lng:queryPosition}, function(responseText){
     					viewJournal.innerHTML = ''
-              journals = responseText.journals ;
+              var journals = responseText.journals ;
               console.log(journals)
               console.log('Starting doing', journals.length)
     					for(var i=0 ;i< journals.length ;i++){
@@ -381,13 +393,20 @@ $browse.click(function(){
                 var button = document.createElement('button')
                 button.setAttribute('class','save');
                 button.setAttribute('data',journals[i]._id)
+                button.setAttribute('name',journals[i].username)
                 button.innerHTML = 'Comment' ;
                 button.onclick = function(e){
+                  console.log(journals)
                   $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
-                    console.log(response)
-
+                    var h4 = document.createElement('h4') ;
+                    h4.innerHTML = response.comments[response.comments.length - 1].user ;
+                    var p = document.createElement('p') ;
+                    p.innerHTML =  $('.comment').val();
+                    var commentsDiv = document.querySelector('.comments') ;
+                    commentsDiv.appendChild(h4) ;
+                    commentsDiv.appendChild(p) ;
+                    $('.comment').val('')
                   })
-                  $('.comment').val('')
                 }
                 console.log('Done da')
                 div.appendChild(input) ;
