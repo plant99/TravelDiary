@@ -61,12 +61,15 @@ $browse.click(function(){
       header.innerHTML = 'JOURNALS MADE NEARBY' ;
       nearbyList.appendChild(header)
       for(var i=0 ;i<journals.length ;i++ ){
+        var dateString = new Date(journals[i].date)
         var header = document.createElement('h2')
         var content = document.createElement('p')
         content.setAttribute('class', 'detailNearby')
         var nearbyJournal = document.createElement('div') ;
         nearbyJournal.setAttribute('class', 'nearbyJournal') ;
         nearbyJournal.setAttribute('data-pos', journals[i].position) ;
+        nearbyJournal.setAttribute('data-votes', journals[i].votes.number)
+        nearbyJournal.setAttribute('data-time', dateString.getTime())
         console.log(journals[i])
         header.innerHTML = journals[i].header ;
         content.innerHTML ='BY: '+ journals[i].author ;
@@ -498,4 +501,113 @@ var logout = document.querySelector('.logout') ;
 logout.onclick = function(){
   Cookies.remove('token',{url:'localhost:3000'}) ;
   location.href = '/login'
+}
+
+//sort handlers
+
+$('.bytimestamp').click(function(){
+  var nearbyJournals = document.querySelectorAll('.nearbyJournal') ;
+  timestamps  = [] ;
+  timeIdDictionary = [] ;
+  for(var i=0;i<nearbyJournals.length ;i++){
+    timestamps.push(nearbyJournals[i].getAttribute('data-time'));
+    timeIdDictionary.push({timestamp: timestamps[i], id: nearbyJournals[i].getAttribute('id')}) ;
+  }
+  timestamps = timestamps.sort() ;
+  var new_divs = [] ;
+  for(var i=0 ;i<timestamps.length;i++){
+    var index = findIndexOfTimestamp(timestamps[i], timeIdDictionary)
+    var old_div = document.getElementById(timeIdDictionary[index].id)
+    var new_div = document.createElement('div') ;
+    new_div.setAttribute('class','nearbyJournal') ;
+    new_div.setAttribute('id', timeIdDictionary[index].id) ;
+    new_div.setAttribute('data-time', timestamps[i]) ;
+    new_div.setAttribute('data-votes', old_div.getAttribute('data-votes')) ;
+    new_div.setAttribute('data-pos', old_div.getAttribute('data-pos')) ;
+    var header = document.createElement('h2')
+    var content = document.createElement('p')
+    content.setAttribute('class', 'detailNearby')
+    header.innerHTML = old_div.childNodes[0].innerHTML ;
+    content.innerHTML = old_div.childNodes[1].innerHTML ;
+    new_div.appendChild(header) ;
+    new_div.appendChild(content) ;
+    new_divs.push(new_div) ;
+  }
+  nearbyList.innerHTML = '' ;
+  for(var i=0 ;i< new_divs.length; i++){
+    nearbyList.appendChild(new_divs[i])
+  }
+})
+
+$('.bypopularity').click(function(){
+  var nearbyJournals = document.querySelectorAll('.nearbyJournal') ;
+  votes  = [] ;
+  voteIdDictionary = [] ;
+  for(var i=0;i<nearbyJournals.length ;i++){
+    votes.push(nearbyJournals[i].getAttribute('data-votes'));
+    voteIdDictionary.push({vote: votes[i], id: nearbyJournals[i].getAttribute('id')}) ;
+  }
+  votes = votes.sort()
+  new_divs = [] ;
+  for(var i=0 ;i<votes.length;i++){
+    var index = findIndexOfVote(votes[i], voteIdDictionary)
+    var old_div = document.getElementById(voteIdDictionary[index].id)
+    var new_div = document.createElement('div') ;
+    new_div.setAttribute('class','nearbyJournal') ;
+    new_div.setAttribute('id', voteIdDictionary[index].id) ;
+    new_div.setAttribute('data-time', old_div.getAttribute('data-time')) ;
+    new_div.setAttribute('data-votes', votes[i]) ;
+    new_div.setAttribute('data-pos', old_div.getAttribute('data-pos')) ;
+    var header = document.createElement('h2')
+    var content = document.createElement('p')
+    content.setAttribute('class', 'detailNearby')
+    header.innerHTML = old_div.childNodes[0].innerHTML ;
+    content.innerHTML = old_div.childNodes[1].innerHTML ;
+    new_div.appendChild(header) ;
+    new_div.appendChild(content) ;
+    new_divs.push(new_div) ;
+    voteIdDictionary.splice(index,1)
+    console.log(index)
+    console.log(voteIdDictionary)
+    new_div.onclick = function(e){
+          if(e.target.getAttribute('class') === 'nearbyJournal'){
+            //for div
+            var parent = e.target ;
+            viewHandlerSidebar(parent) ;
+
+          }else{
+            //for its children
+            var parent = e.target.parentNode ;
+
+            viewHandlerSidebar(parent)
+          }
+        }
+  }
+  nearbyList.innerHTML = '' ;
+  for(var i=0 ;i< new_divs.length; i++){
+    nearbyList.appendChild(new_divs[i])
+  }
+})
+
+
+function findIndexOfTimestamp(timestamp, array){
+  for(var i=0 ;i< array.length;i++){
+    if(array[i].timestamp == timestamp){
+      return i ;
+    }
+  }
+  return -1 ;
+}
+
+function findIndexOfVote(vote, array){
+  console.log(vote, array)
+  for(var i=0 ;i< array.length;i++){
+    if(array[i]){
+      if(array[i].vote == vote){
+        console.log(array[i])
+        return i ;
+      }
+    }
+  }
+  return -1 ;
 }
