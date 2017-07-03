@@ -216,31 +216,31 @@ A server for the above app is running live at [`this place`](http://139.59.255.9
 
 ## Screenshots [TL;DR]
 
-Empty login Page
+###### Empty login Page
 [![loginEmpty.png](https://s19.postimg.org/67gp7dgc3/login_Empty.png)](https://postimg.org/image/42wc6aepb/)
 
-Signup Page
+###### Signup Page
 [![emptySignup.png](https://s19.postimg.org/nw8fyzs37/empty_Signup.png)](https://postimg.org/image/4r56p8df3/)
 
-Create Tab(Landing page)
+###### Create Tab(Landing page)
 [![landingPage.png](https://s19.postimg.org/stm0k3u2b/landing_Page.png)](https://postimg.org/image/w0gk3qei7/)
 
-View Public journals tab
+###### View Public journals tab
 [![viewPublic.png](https://s19.postimg.org/j7sg3t2wj/view_Public.png)](https://postimg.org/image/6t5o3hbe7/)
 
-View nearby
+###### View nearby
 [![nearBy.png](https://s19.postimg.org/45bmfdsz7/near_By.png)](https://postimg.org/image/nzxo1i86n/)
 
-Profile Section (suggestion)
+###### Profile Section (suggestion)
 [![suggestion.png](https://s19.postimg.org/ehxx1gmib/suggestion.png)](https://postimg.org/image/jglffzqb3/)
 
-View Profile
+###### View Profile
 [![viewImages.png](https://s19.postimg.org/azqiitb03/view_Images.png)](https://postimg.org/image/qxz88y57z/)
 
-Sort Buttons
+###### Sort Buttons
 [![viewImages.png](https://s19.postimg.org/azqiitb03/view_Images.png)](https://postimg.org/image/qxz88y57z/)
 
-Like and comment section
+###### Like and comment section
 [![commentAppears.png](https://s19.postimg.org/cc87kp8fn/comment_Appears.png)](https://postimg.org/image/egsklsa27/)
 
 [![commentAppears.png](https://s19.postimg.org/cc87kp8fn/comment_Appears.png)](https://postimg.org/image/egsklsa27/)
