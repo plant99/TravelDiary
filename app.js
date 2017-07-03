@@ -40,6 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 //Routes
+app.get('/', function(req, res, next){
+  res.redirect('/dashboard')
+})
 app.use('/login',loginHandler)
 app.use('/signup',signUpHandler)
 app.use(authenticate)
