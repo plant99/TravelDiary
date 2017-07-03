@@ -207,7 +207,7 @@ A Javascript runtime for running our server code.
 
 ## Pending tasks(Top 3)
 
-- [ ] Convert fulltime to just the date, while saving a new Journal
+- [ ] Use just the date instead of the whole Date string, while saving a new Journal
 - [ ] Verify file type before uploading to server
 - [ ] Make the layouts responsive
 
