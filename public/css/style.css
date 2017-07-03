@@ -17,6 +17,15 @@
 .viewJournal p span .like:hover{
 	cursor: pointer; 
 }
+.journalSelected p span .like{
+	width:35px !important; 
+	height: 45px !important;
+	margin-top:10px;
+	margin-left: 10px ;
+}
+.journalSelected p span .like:hover{
+	cursor: pointer; 
+}
 body{    
 
     font-family: 'Shadows Into Light', Monospace;
