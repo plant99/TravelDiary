@@ -60,7 +60,7 @@
 			         if(returnedData.token || returnedData.token!=undefined){
 			         	$.cookie('token',returnedData.token, {expires: 1}, {domain: 'localhost:3000'})
 			         	console.log(returnedData)
-						location.href  = "/profile"
+						location.href  = "/dashboard"
 			         }else{
 			         	notify(returnedData.message)
 			         	setTimeout(function(){
