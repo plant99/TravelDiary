@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,9 +52,9 @@
 	<h1 style="color: cyan; font-size: 30px;">SignUp to use NoticeBoard</h1>
 	<form method="post" action="/signup" onsubmit="return validateForm();">
 		<p style="color: cyan; font-size: 22px;">*Every field is compulsory</p>
-		<label>Username:<input type="text" style="color: violet; font-size: 15px ;"  name="username" class="username"> <span class="uNameVerifiedContainer"><img class="uNameVerified" src=""></span></label>
+		<label>Username:<input type="text" style="color: violet; font-size: 15px ;" required="true"  name="username" class="username"> <span class="uNameVerifiedContainer"><img class="uNameVerified" src=""></span></label>
 		<br>
-		<label>Password:<input type="password" style="color: violet; font-size: 15px ;"  name="password"></label>
+		<label>Password:<input required="true" type="password" style="color: violet; font-size: 15px ;"  name="password"></label>
 		<br>
 		<!--
 		<label>What are you?
@@ -67,7 +68,7 @@
 		<p style="color: cyan; font-size: 20px ;">Type the numbers shown in the picture, in the box below<br>(Don't use spaces)</p>
 		<img src="data:image/jpeg;base64,<%= valicode %>"/> <br>
 		
-		<input type="text" style="color: violet; font-size: 15px ;"  name="captchaResponse"><br>
+		<input required="true" type="text" style="color: violet; font-size: 15px ;"  name="captchaResponse"><br>
 		<input type="submit" style="color: violet; font-size: 15px ;" value="Submit">
 	</form>
 	<p class="notInTheForm" style="color: white ; font-size: 25px">Existing users might want to <a style="color: yellow; font-size: 25px;" href="/login" class="btn">LOGIN</a></p>
