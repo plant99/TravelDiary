@@ -213,3 +213,6 @@ A Javascript runtime for running our server code.
 
 ## Demo Server
 A server for the above app is running live at [`this place`](http://139.59.255.96:3000)
+
+##Screenshots [TL;DR]
+[![loginEmpty.png](https://s19.postimg.org/67gp7dgc3/login_Empty.png)](https://postimg.org/image/42wc6aepb/)
