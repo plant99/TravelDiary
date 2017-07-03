@@ -27,7 +27,7 @@ router.get('/uname_suggestions/:username', function(req, res, next){
 })
 
 router.get('/user_journals/:username', function(req, res, next){
-	Journal.find({author: req.params.username}, function(err, journals){
+	Journal.find({author: req.params.username, type:'public'}, function(err, journals){
 		res.json({journals: journals})
 	})
 })
