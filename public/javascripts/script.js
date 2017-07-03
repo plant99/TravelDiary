@@ -311,7 +311,7 @@ function loadProfile(){
             var div = document.createElement('div')
             div.setAttribute('class','addcomment') ;
             var input = document.createElement('input')
-            input.setAttribute('class','comment')
+            input.setAttribute('class','commentProfileView')
             input.setAttribute('type','text') ;
             input.setAttribute('placeholder', 'Enter your comment here')
             var button = document.createElement('button')
@@ -319,17 +319,17 @@ function loadProfile(){
             button.setAttribute('data',journal._id)
             button.innerHTML = 'Comment' ;
             button.onclick = function(e){
-              $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
-                if($('.comment').val()){
+              $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.commentProfileView').val()}, function(response){
+                if($('.commentProfileView').val()){
                   var h4 = document.createElement('h4') ;
                   h4.innerHTML = response.comments[response.comments.length - 1].user ;
                   var p = document.createElement('p') ;
-                  p.innerHTML =  $('.comment').val();
+                  p.innerHTML =  $('.commentProfileView').val();
                   var commentsDiv = document.querySelector('.comments') ;
                   commentsDiv.appendChild(h4) ;
                   commentsDiv.appendChild(p) ;
                 }
-                $('.comment').val('')
+                $('.commentProfileView').val('')
 
               })
             }
