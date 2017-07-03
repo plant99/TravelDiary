@@ -531,11 +531,28 @@ $('.bytimestamp').click(function(){
     content.innerHTML = old_div.childNodes[1].innerHTML ;
     new_div.appendChild(header) ;
     new_div.appendChild(content) ;
+    new_div.onclick = function(e){
+          if(e.target.getAttribute('class') === 'nearbyJournal'){
+            //for div
+            var parent = e.target ;
+            viewHandlerSidebar(parent) ;
+
+          }else{
+            //for its children
+            var parent = e.target.parentNode ;
+
+            viewHandlerSidebar(parent)
+          }
+        }
     new_divs.push(new_div) ;
+    
   }
   nearbyList.innerHTML = '' ;
+  var header = document.createElement('h2')
+  header.innerHTML = 'JOURNALS MADE NEARBY(Newest first)' ;
+  nearbyList.appendChild(header)
   for(var i=0 ;i< new_divs.length; i++){
-    nearbyList.appendChild(new_divs[i])
+    nearbyList.appendChild(new_divs[new_divs.length - i -1])
   }
 })
 
@@ -584,8 +601,11 @@ $('.bypopularity').click(function(){
         }
   }
   nearbyList.innerHTML = '' ;
+  var header = document.createElement('h2')
+  header.innerHTML = 'JOURNALS MADE NEARBY(Most voted first)' ;
+  nearbyList.appendChild(header)
   for(var i=0 ;i< new_divs.length; i++){
-    nearbyList.appendChild(new_divs[i])
+    nearbyList.appendChild(new_divs[new_divs.length -1-i])
   }
 })
 
