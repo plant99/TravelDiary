@@ -71,7 +71,7 @@ var user  User({username: req.body.username, password: req.body.password, type: 
 var captchaImg = function(){
 		captchaNum = Math.floor(Math.random()*90000+10000)
         var p = new captchapng(200,50,captchaNum); // width,height,numeric captcha
-        p.color(115, 95, 197, 100);  // First color: background (red, green, blue, alpha)
+        p.color(255,255,255);  // First color: background (red, green, blue, alpha)
         p.color(30, 104, 21, 255); 
         p.color(25,254,011,30)// Second color: paint (red, green, blue, alpha)
         var img = p.getBase64();
