@@ -23,14 +23,18 @@ router.post('/add_comment', function(req, res, next){
 		if(err){
 			console.log(err)
 		}else{
-			journal.comments.push({user: req.decoded._doc.username, comment: req.body.comment});
-			journal.save(function(err){
-				if(err){
-					console.log(err)
-				}else{
-					res.send(journal)
-				}
-			})
+			if(req.body.comment!=null){
+				journal.comments.push({user: req.decoded._doc.username, comment: req.body.comment});
+				journal.save(function(err){
+					if(err){
+						console.log(err)
+					}else{
+						res.send(journal)
+					}
+				})
+			}else{
+				res.json({success: false})
+			}
 		}
 	})
 })
