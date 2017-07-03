@@ -1,5 +1,4 @@
-# Noticeboard
-
+# TravelDiary
 An online noticeboard to be used for regulating announcements and academic materials for a class
 
 ## Overview
