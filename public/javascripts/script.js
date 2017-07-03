@@ -282,8 +282,31 @@ function loadProfile(){
               }
               journalSelected.appendChild(ul) ;
             }
-
             journalSelected.appendChild(footer)
+
+
+            var p = document.createElement('p') ;
+            p.innerHTML = 'Liked it? Give it a vote'
+            var span = document.createElement('span');
+            span.setAttribute('class', 'vote') ;
+            span.setAttribute('data',journal._id)
+            span.innerHTML = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+journal.votes.number+')'
+            span.onclick = function(e){
+              if(e.target.getAttribute('class') === 'like'){
+                var id = e.target.parentNode.getAttribute('data') ;
+                $.post('/stats/add_like/',{id:id}, function(response){
+                  span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
+                })
+              }else{
+                var id = e.target.getAttribute('data') ;
+                $.post('/stats/add_like',{id:id}, function(response){
+                  span.innerHTML   = '<img class="like" src="/images/glyphicons/png/glyphicons-344-thumbs-up.png"> ('+response.number+')'
+                })
+              }
+              span.onclick = null ;
+            }
+            p.appendChild(span) ;
+            journalSelected.appendChild(p)
             var comments = journal.comments ;
             if(comments.length){
               var h3 = document.createElement('h3')
