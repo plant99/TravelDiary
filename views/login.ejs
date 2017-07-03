@@ -66,6 +66,11 @@
 			         	setTimeout(function(){
 			         		$('.notification').remove()
 			         	}, 4000)
+			         	if(returnedData.message === 'Authentication failed. User not found.'){
+			         		setTimeout(function(){
+				         		location.href = '/signup'
+				         	}, 1000)
+			         	}
 			         }
 				});
 			}
