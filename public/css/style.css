@@ -293,6 +293,9 @@ ul li{
 	font-size: 22px ;
 }
 .comments{
+	padding-top:10px ;
+	padding-bottom: 10px ;
+	border-radius: 4px ;
 	background-color: rgba(255,255,255,0.6);
 }
 .comments h4{
@@ -300,4 +303,22 @@ ul li{
 }
 .comments p{
 	padding-left: 20px ;
+}
+.logout{
+	position: fixed;
+	border-radius:50% ;
+	bottom: 50px ;
+	right: 50px ;
+	width:70px ;
+	height: 70px ;
+	background-color: rgba(81,221,71,0.7)
+}
+.logout img{
+	margin-top: 15px ;
+	margin-left: 4px ;
+	width:40px ;
+	height: 40px ;
+}
+.logout:hover{
+	cursor: pointer;
 }
