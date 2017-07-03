@@ -284,6 +284,60 @@ function loadProfile(){
             }
 
             journalSelected.appendChild(footer)
+            var comments = journal.comments ;
+            if(comments.length){
+              var h3 = document.createElement('h3')
+              h3.innerHTML = 'Comments'
+              var div = document.createElement('div') ;
+              div.appendChild(h3)
+              div.setAttribute('class','comments')
+              for(var j=0;j<comments.length ;j++){
+                var h4 = document.createElement('h4') ;
+                h4.innerHTML = comments[j].user ;
+                var p = document.createElement('p') ;
+                p.innerHTML = comments[j].comment ;
+                div.appendChild(h4) ;
+                div.appendChild(p)
+              }
+              journalSelected.appendChild(div)
+            }else{
+              var div = document.createElement('div')
+              var h3 = document.createElement('h3')
+              h3.innerHTML = 'Comments'
+              div.appendChild(h3)
+              div.setAttribute('class','comments')
+              journalSelected.appendChild(div)
+            }
+            var div = document.createElement('div')
+            div.setAttribute('class','addcomment') ;
+            var input = document.createElement('input')
+            input.setAttribute('class','comment')
+            input.setAttribute('type','text') ;
+            input.setAttribute('placeholder', 'Enter your comment here')
+            var button = document.createElement('button')
+            button.setAttribute('class','save');
+            button.setAttribute('data',journal._id)
+            button.innerHTML = 'Comment' ;
+            button.onclick = function(e){
+              $.post('/stats/add_comment',{id: e.target.getAttribute('data'), comment: $('.comment').val()}, function(response){
+                if($('.comment').val()){
+                  var h4 = document.createElement('h4') ;
+                  h4.innerHTML = response.comments[response.comments.length - 1].user ;
+                  var p = document.createElement('p') ;
+                  p.innerHTML =  $('.comment').val();
+                  var commentsDiv = document.querySelector('.comments') ;
+                  commentsDiv.appendChild(h4) ;
+                  commentsDiv.appendChild(p) ;
+                }
+                $('.comment').val('')
+
+              })
+            }
+            div.appendChild(input) ;
+            div.appendChild(button) ;
+            journalSelected.appendChild(div) ;
+            console.log(div)
+          console.log('Done da')
         })
       }
     }
