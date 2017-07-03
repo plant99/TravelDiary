@@ -149,6 +149,13 @@ $browse.click(function(){
                     div.appendChild(p)
                   }
                   viewJournal.appendChild(div)
+                }else{
+                  var div = document.createElement('div')
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'Comments'
+                  div.appendChild(h3)
+                  div.setAttribute('class','comments')
+                  viewJournal.appendChild(div)
                 }
                 var div = document.createElement('div')
                 div.setAttribute('class','addcomment') ;
@@ -256,7 +263,14 @@ $browse.click(function(){
                     div.appendChild(p)
                   }
                   viewJournal.appendChild(div)
-                }
+                }else{
+                    var div = document.createElement('div')
+                    var h3 = document.createElement('h3')
+                    h3.innerHTML = 'Comments'
+                    div.appendChild(h3)
+                    div.setAttribute('class','comments')
+                    viewJournal.appendChild(div)
+                  }
                 var div = document.createElement('div')
                 div.setAttribute('class','addcomment') ;
                 var input = document.createElement('input')
@@ -382,6 +396,13 @@ $browse.click(function(){
                     div.appendChild(h4) ;
                     div.appendChild(p)
                   }
+                  viewJournal.appendChild(div)
+                }else{
+                  var div = document.createElement('div')
+                  var h3 = document.createElement('h3')
+                  h3.innerHTML = 'Comments'
+                  div.appendChild(h3)
+                  div.setAttribute('class','comments')
                   viewJournal.appendChild(div)
                 }
                 var div = document.createElement('div')
