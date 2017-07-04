@@ -132,15 +132,10 @@ A Javascript runtime for running our server code.
 	mongo
 	```
 	in Terminal.
-2. In the shell, create a database named `noticeboard` by typing
+2. In the shell, create a database named `traveldiary` by typing
 	```
-	use noticeboard
+	use traveldiary
 	```
-3. Create the first `Administrator` by typing
-	```
-	db.users.insert({username: admin, password:'$2a$10$JePpGspbJohVb1THFEtHMeIsJgje4vp72G0GQFD2WzVxrFPtpV4ay',type: 'teacher',moderated:'false'})
-	```
-	which creates an User with `username: 'admin'` and `password:'helloFriend'`
 	
 
 ###### Server setup
